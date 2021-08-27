@@ -1,6 +1,13 @@
+name: web-bg-publish
+
 on:
-  release:
-    types: [created]
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+env:
+  CARGO_TERM_COLOR: always
 
 jobs:
   release:

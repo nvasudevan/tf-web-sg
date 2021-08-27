@@ -32,7 +32,7 @@ fn handle_connection(mut tcp_str: TcpStream, app_env: &str, app_ver: &str) {
 fn main() {
     let app_env = std::env::var("APP_ENV").expect("APP_ENV environment variable is not set!");
     let app_ver = std::env::var("APP_VER").expect("APP_VER environment variable is not set!");
-    let bind_addr = "127.0.0.1:8080";
+    let bind_addr = "0.0.0.0:8080";
     println!("=> starting web server on {}", bind_addr);
     let my_web = TcpListener::bind(bind_addr).unwrap();
 

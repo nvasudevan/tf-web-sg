@@ -20,8 +20,8 @@ jobs:
         include:
           - name: linux
             os: ubuntu-latest
-            artifact_name: target/release/<name>
-            asset_name: <name>-linux
+            artifact_name: target/release/tf-web-bg
+            asset_name: tf-web-bg-linux
 
     steps:
     - uses: actions/checkout@v1

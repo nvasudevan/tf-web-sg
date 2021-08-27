@@ -9,13 +9,6 @@ on:
 env:
   CARGO_TERM_COLOR: always
 
-name: Build, bump tag version and release
-
-on:
-  push:
-    branches:
-      - master
-
 jobs:
   release:
     name: Build and Release

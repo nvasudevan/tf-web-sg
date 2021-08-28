@@ -2,7 +2,7 @@ name: web-bg-gchr-publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release-* ]
 
 env:
   CARGO_TERM_COLOR: always
@@ -36,6 +36,9 @@ jobs:
         uses: docker/metadata-action@v3.5.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build project
+        run: cargo build --release --locked
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0

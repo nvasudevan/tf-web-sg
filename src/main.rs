@@ -11,8 +11,9 @@ fn handle_connection(mut tcp_str: TcpStream, app_env: &str, app_ver: &str) {
     if let Ok(_) = tcp_str.read(&mut buf) {
         println!("client msg: {}", String::from_utf8_lossy(&buf[..]));
         let now = Utc::now().format("%Y-%m-%d-%H-%M-%S%.3f");
-        let resp_hdr = "HTTP/1.1 200 OK\r\n\r\n";
-        let res = format!("{}{} {} {}\n", resp_hdr, now, app_env, app_ver);
+        let contents = format!("{} {} {}", now, app_env, app_ver);
+        let res_hdr = format!("HTTP/1.1 200 OK\r\nContent-Length: {}", contents.len());
+        let res = format!("{}\r\n\r\n{}\n", res_hdr, contents);
         match tcp_str.write(res.as_bytes()) {
             Ok(_) => {
                 println!("=> response sent to client: {}", client);

@@ -1,0 +1,26 @@
+name: web-bg-gh-publish
+
+on:
+  release:
+    types: [created]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-release-and-gchr-push:
+    name: release ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [x86_64-unknown-linux-musl]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@master
+
+      - name: Compile and release
+        uses: rust-build/rust-build.action@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUSTTARGET: ${{ matrix.target }}
